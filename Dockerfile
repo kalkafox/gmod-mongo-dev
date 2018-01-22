@@ -15,7 +15,7 @@ COPY ./module/libmongoclient.so /opt/garrysmod/bin
 RUN chmod +x /docker-entrypoint.sh && \
     chown steam:steam /docker-entrypoint.sh && \
     mkdir -p /opt/garrysmod && \
-    chown -r steam:steam /opt/garrysmod
+    chown -R steam:steam /opt/garrysmod
 USER steam
 
 RUN /opt/steamcmd/steamcmd.sh +login anonymous +force_install_dir /opt +app_update 4020 validate +quit
