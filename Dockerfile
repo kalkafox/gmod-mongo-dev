@@ -12,10 +12,8 @@ COPY ./docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh && \
     chown steam:steam /docker-entrypoint.sh && \
     mkdir -p /opt/garrysmod && \
-    mkdir -p /opt/garrysmod/garrysmod/lua/bin && \
-    mkdir -p /opt/garrysmod/bin
-    cp ./module/gmsv_mongomod_linux.dll /opt/garrysmod/garrysmod/lua/bin && \
-    cp ./module/libmongoclient.so /opt/garrysmod/bin
+    mkdir -p /opt/garrysmod/bin && \
+    cp ./module/libmongoclient.so /opt/garrysmod/bin && \
     chown -r steam:steam /opt/garrysmod
 USER steam
 
