@@ -1,29 +1,16 @@
 FROM kalka/steamcmd:latest
 LABEL maintainer="Kalka <k@kalka.io>"
 
-USER steam
+RUN /opt/steamcmd/steamcmd.sh +login anonymous +force_install_dir /home/steam/garrysmod +app_update 4020 validate +quit
 
 ENV port=27015
 
-ENV LD_LIBRARY_PATH=/opt/garrysmod/bin
+ENV LD_LIBRARY_PATH=/home/steam/bin
 
-USER root
-COPY ./docker-entrypoint.sh /docker-entrypoint.sh
-
-COPY ./module/libmongoclient.so /opt/garrysmod/bin
-
-RUN chmod +x /docker-entrypoint.sh && \
-    chown steam:steam /docker-entrypoint.sh && \
-    mkdir -p /opt/garrysmod && \
-    chown -R steam:steam /opt/garrysmod
-USER steam
-
-RUN /opt/steamcmd/steamcmd.sh +login anonymous +force_install_dir /opt +app_update 4020 validate +quit
-
-VOLUME /opt/garrysmod/
+RUN curl -o /home/steam/garrysmod/bin/libmongoclient.so https://dl.kalka.io/libmongoclient.so
 
 EXPOSE ${port}/udp
 
-ENTRYPOINT ["/docker-entrypoint.sh"]
+WORKDIR /home/steam/garrysmod
 
-CMD ["-game", "garrysmod", "+gamemode", "sandbox", "+map", "gm_flatgrass"]
+CMD ["srcds_run", "-game", "garrysmod", "+gamemode", "sandbox", "+map", "gm_flatgrass"]
