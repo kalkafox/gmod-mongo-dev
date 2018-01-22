@@ -13,4 +13,4 @@ EXPOSE ${port}/udp
 
 WORKDIR /home/steam/garrysmod
 
-CMD ["srcds_run", "-game", "garrysmod", "+gamemode", "sandbox", "+map", "gm_flatgrass"]
+ENTRYPOINT ["./srcds_run"]
