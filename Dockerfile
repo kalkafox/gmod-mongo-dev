@@ -7,7 +7,7 @@ ENV port=27015
 
 ENV LD_LIBRARY_PATH=/home/steam/bin
 
-RUN curl -o /home/steam/garrysmod/bin/libmongoclient.so https://dl.kalka.io/libmongoclient.so
+RUN curl -o /home/steam/garrysmod/libmongoclient.so https://dl.kalka.io/libmongoclient.so
 
 EXPOSE ${port}/udp
 
