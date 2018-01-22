@@ -9,11 +9,12 @@ ENV LD_LIBRARY_PATH=/opt/garrysmod/bin
 
 USER root
 COPY ./docker-entrypoint.sh /docker-entrypoint.sh
+
+COPY ./module/libmongoclient.so /opt/garrysmod/bin
+
 RUN chmod +x /docker-entrypoint.sh && \
     chown steam:steam /docker-entrypoint.sh && \
     mkdir -p /opt/garrysmod && \
-    mkdir -p /opt/garrysmod/bin && \
-    cp ./module/libmongoclient.so /opt/garrysmod/bin && \
     chown -r steam:steam /opt/garrysmod
 USER steam
 
